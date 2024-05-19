@@ -9,7 +9,7 @@
     <h1>Search MOT History</h1>
 
     <form @onsubmit="Search">
-        <input id="registrationNumber" @bind="@registrationNumber" @oninput="OnInput" aria-label="Registration Number" placeholder="Registration Number"/>
+        <input id="registrationNumber" @bind:event="oninput" @bind:get="registrationNumber" @bind:set="OnInput" aria-label="Registration Number" placeholder="Registration Number" />
 
         <button class="btn btn-primary" @onclick="Search" aria-label="Search">
             <i class="fas @buttonClass"></i>
@@ -88,10 +88,10 @@
         buttonClass = "fa-search";
     }
 
-    private void OnInput(ChangeEventArgs e)
+    private void OnInput(string value)
     {
         // Convert to uppercase and remove non-alphanumeric characters
-        registrationNumber = Regex.Replace(e.Value.ToString().ToUpper(), @"[^a-zA-Z0-9\s]", "");
+        registrationNumber = Regex.Replace(value.ToUpper(), @"[^a-zA-Z0-9\s]", "");
         if (String.IsNullOrEmpty(registrationNumber))
         {
             invalidReg = false;
