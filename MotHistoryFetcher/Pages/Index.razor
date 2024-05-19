@@ -8,10 +8,10 @@
     <h1>Search MOT History</h1>
 
     <div>
-        <input id="registrationNumber" @bind="@registrationNumber" @oninput="OnInput" />
+        <input id="registrationNumber" @bind="@registrationNumber" @oninput="OnInput" aria-label="Registration Number" placeholder="Registration Number"/>
 
-        <button class="btn btn-primary" @onclick="Search">
-            <i class="fas fa-search"></i>
+        <button class="btn btn-primary" @onclick="Search" aria-label="Search">
+            <i class="fas @buttonClass"></i>
         </button>
     </div>
     @if (invalidReg)
@@ -62,9 +62,11 @@
     private string registrationNumber;
     private MotHistory? history;
     private bool invalidReg;
+    private string buttonClass = "fa-search";
 
     private async Task Search()
     {
+        buttonClass = "fa-spin fa-spinner";
         invalidReg = false;
         if (!string.IsNullOrWhiteSpace(registrationNumber))
         {
@@ -77,6 +79,7 @@
             }
             history = searchResults.First();
         }
+        buttonClass = "fa-search";
     }
 
     private void OnInput(ChangeEventArgs e)
