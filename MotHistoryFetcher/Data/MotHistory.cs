@@ -23,12 +23,31 @@ namespace MotHistoryFetcher
         public DateTime? MotTestExpiryDate { get; set; }
         [JsonPropertyName("motTests")]
         public List<MotTest> MotTests { get; set; } = new List<MotTest>();
+        public MotTest? LatestMot
+        {
+            get
+            {
+                return MotTests
+                    .OrderByDescending(m => m.CompletedDate)
+                    .FirstOrDefault();
+            }
+        }
         public string MotExpiryDateString
         {
             get
             {
-                if (MotTestExpiryDate == null) return "N/A";
-                return MotTestExpiryDate.Value.ToShortDateString();
+                if (MotTestExpiryDate != null) return MotTestExpiryDate.Value.ToShortDateString();
+                if (MotTests.Count == 0 || LatestMot.ExpiryDate == null) return "N/A";
+                return LatestMot.ExpiryDate.Value.ToShortDateString();
+            }
+        }
+        public string MileageAtLastMot
+        {
+            get
+            {
+                if (LatestMot == null) return "N/A";
+
+                return $"{LatestMot.OdometerValue} {LatestMot.OdometerUnit}";
             }
         }
 
