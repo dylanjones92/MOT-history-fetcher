@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="DotNetEnv" Version="3.0.0" />
+    <PackageReference Include="Font.Awesome" Version="5.15.4" />
   </ItemGroup>
 
 </Project>
