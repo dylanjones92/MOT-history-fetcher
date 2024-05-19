@@ -7,13 +7,13 @@
 <div class="content-center">
     <h1>Search MOT History</h1>
 
-    <div>
+    <form @onsubmit="Search">
         <input id="registrationNumber" @bind="@registrationNumber" @oninput="OnInput" aria-label="Registration Number" placeholder="Registration Number"/>
 
         <button class="btn btn-primary" @onclick="Search" aria-label="Search">
             <i class="fas @buttonClass"></i>
         </button>
-    </div>
+    </form>
     @if (invalidReg)
     {
         <div class="errorMessage">
