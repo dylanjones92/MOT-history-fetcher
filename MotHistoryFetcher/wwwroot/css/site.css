@@ -30,6 +30,38 @@ article {
     text-align: center;
 }
 
+.mot-history {
+    min-width: 50%;
+    color: black;
+    padding: 1em;
+    margin: 1em;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.5);
+}
+
+.mot-history .header h6 {
+    border-bottom: solid;
+    border-bottom-color: rgba(0,0,0,0.5);
+    border-bottom-width: thin;
+}
+
+.mot-history table {
+    width: 100%;
+}
+
+.mot-history td {
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+.mot-history tr td:first-child{
+    text-align: right;
+}
+
+.mot-history tr td:last-child {
+    text-align: left;
+}
+
 h1:focus {
     outline: none;
 }
