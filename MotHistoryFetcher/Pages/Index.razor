@@ -2,6 +2,7 @@
 @using System.Text.RegularExpressions
 @using MotHistoryFetcher
 @inject MotHistoryService MotHistoryService
+@inject IJSRuntime JSRuntime
 
 <PageTitle>Mot History</PageTitle>
 <div class="content-center">
@@ -86,5 +87,13 @@
     {
         // Convert to uppercase and remove non-alphanumeric characters
         registrationNumber = Regex.Replace(e.Value.ToString().ToUpper(), @"[^a-zA-Z0-9\s]", "");
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JSRuntime.InvokeVoidAsync("focusInput", "registrationNumber");
+        }
     }
 }
