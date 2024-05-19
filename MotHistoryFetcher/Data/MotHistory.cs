@@ -28,7 +28,7 @@ namespace MotHistoryFetcher
             get
             {
                 if (MotTestExpiryDate == null) return "N/A";
-                return MotTestExpiryDate.ToString();
+                return MotTestExpiryDate.Value.ToShortDateString();
             }
         }
 
