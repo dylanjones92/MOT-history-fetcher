@@ -30,11 +30,21 @@ article {
     text-align: center;
 }
 
+.error-message {
+    background: rgba(255, 0, 0, 0.5);
+    border-radius: 10px;
+    padding: 1rem;
+    margin: 1rem;
+}
+.error-message p {
+    margin: 0px;
+}
+
 .mot-history {
     min-width: 50%;
     color: black;
-    padding: 1em;
-    margin: 1em;
+    padding: 1rem;
+    margin: 1rem;
     border-radius: 10px;
     background: rgba(255,255,255,0.5);
 }
@@ -50,8 +60,8 @@ article {
 }
 
 .mot-history td {
-    padding-left: 1em;
-    padding-right: 1em;
+    padding-left: 1rem;
+    padding-right: 1rem;
     width: 50%;
 }
 

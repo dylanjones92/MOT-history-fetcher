@@ -17,7 +17,7 @@
     </form>
     @if (invalidReg)
     {
-        <div class="errorMessage">
+        <div class="error-message">
             <p>Not a valid Registration Number</p>
         </div>
     }
@@ -76,6 +76,7 @@
             {
                 invalidReg = true;
                 history = null;
+                buttonClass = "fa-search";
                 return;
             }
             history = searchResults.First();
@@ -87,6 +88,10 @@
     {
         // Convert to uppercase and remove non-alphanumeric characters
         registrationNumber = Regex.Replace(e.Value.ToString().ToUpper(), @"[^a-zA-Z0-9\s]", "");
+        if (String.IsNullOrEmpty(registrationNumber))
+        {
+            invalidReg = false;
+        }
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
