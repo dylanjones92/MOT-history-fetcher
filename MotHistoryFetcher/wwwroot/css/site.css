@@ -59,17 +59,17 @@ article {
     width: 100%;
 }
 
-.mot-history td {
+.mot-history td, th {
     padding-left: 1rem;
     padding-right: 1rem;
     width: 50%;
 }
 
-.mot-history tr td:first-child{
+.mot-history tr th{
     text-align: right;
 }
 
-.mot-history tr td:last-child {
+.mot-history tr td {
     text-align: left;
 }
 
