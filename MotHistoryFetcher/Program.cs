@@ -12,7 +12,7 @@ builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddScoped(sp =>
 {
-    var httpClient = new HttpClient { BaseAddress = new Uri(builder.Configuration["MOT_HISTORY_BASE_URL"]) };
+    var httpClient = new HttpClient { BaseAddress = new Uri(builder.Configuration["MotHistoryBaseUrl"]) };
     httpClient.DefaultRequestHeaders.Add("x-api-key", builder.Configuration["MOT_HISTORY_API_KEY"]);
     return httpClient;
 });
