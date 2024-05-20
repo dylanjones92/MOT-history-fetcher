@@ -21,6 +21,12 @@
             <p>Not a valid Registration Number</p>
         </div>
     }
+    @if (contactApiFailed)
+    {
+        <div class="error-message">
+            <p>Unable to retreive vehicle details: Connection refused</p>
+        </div>
+    }
     @if (history != null)
     {
         <div class="mot-history">
@@ -64,19 +70,28 @@
 
 
 @code {
-    private string registrationNumber;
+    private string registrationNumber = string.Empty;
     private MotHistory? history;
-    private bool invalidReg;
+    private bool invalidReg = false;
+    private bool contactApiFailed = false;
     private string buttonClass = "fa-search";
 
     private async Task Search()
     {
         buttonClass = "fa-spin fa-spinner";
         invalidReg = false;
+        contactApiFailed = false;
         if (!string.IsNullOrWhiteSpace(registrationNumber))
         {
             var searchResults = await MotHistoryService.SearchByRegistrationAsync(registrationNumber);
-            if (searchResults.Count != 1)
+            if (searchResults == null)
+            {
+                contactApiFailed = true;
+                history = null;
+                buttonClass = "fa-search";
+                return;
+            }
+            if (searchResults?.Count != 1)
             {
                 invalidReg = true;
                 history = null;
@@ -88,8 +103,9 @@
         buttonClass = "fa-search";
     }
 
-    private void OnInput(string value)
+    private void OnInput(string? value)
     {
+        if (value == null) return;
         // Convert to uppercase and remove non-alphanumeric characters
         registrationNumber = Regex.Replace(value.ToUpper(), @"[^a-zA-Z0-9\s]", "");
         if (String.IsNullOrEmpty(registrationNumber))

@@ -16,11 +16,11 @@ namespace MotHistoryFetcher
             _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
         }
 
-        public async Task<List<MotHistory>> SearchByRegistrationAsync(string registrationNumber)
+        public async Task<List<MotHistory>?> SearchByRegistrationAsync(string registrationNumber)
         {
             try
             {
-                registrationNumber = String.Concat(registrationNumber.Where(c => !Char.IsWhiteSpace(c)));
+                registrationNumber = string.Concat(registrationNumber.Where(c => !Char.IsWhiteSpace(c)));
                 var response = await _httpClient.GetAsync($"trade/vehicles/mot-tests?registration={registrationNumber}");
                 if (response.IsSuccessStatusCode)
                 {
@@ -31,9 +31,13 @@ namespace MotHistoryFetcher
                 {
                     // Other error response
                     var errorResponse = await response.Content.ReadFromJsonAsync<MotHistoryErrorResponse>();
-                    if (response.StatusCode == HttpStatusCode.NotFound && errorResponse.ErrorMessage.StartsWith("No MOT Tests found with vehicle registration"))
+                    if (response.StatusCode == HttpStatusCode.NotFound && ((errorResponse?.ErrorMessage?.StartsWith("No MOT Tests found with vehicle registration")) ?? false))
                     {
                         return new List<MotHistory>();
+                    }
+                    if (response.StatusCode == HttpStatusCode.Forbidden)
+                    {
+                        return null;
                     }
                     throw new HttpRequestException($"HTTP Error {response.StatusCode}: {errorResponse?.ErrorMessage ?? "Unknown error"}");
                 }
