@@ -6,7 +6,7 @@ namespace MotHistoryFetcher
     public class MotTest
     {
         [JsonPropertyName("completedDate")]
-        public string CompletedDateString { get; set; }
+        public string? CompletedDateString { get; set; }
         [JsonIgnore]
         public DateTime CompletedDate
         {
@@ -17,9 +17,9 @@ namespace MotHistoryFetcher
                 return date;
             }
         }
-        public string TestResult { get; set; }
+        public string? TestResult { get; set; }
         [JsonPropertyName("expiryDate")]
-        public string ExpiryDateString { get; set; }
+        public string? ExpiryDateString { get; set; }
         [JsonIgnore]
         public DateTime? ExpiryDate
         {
@@ -31,7 +31,7 @@ namespace MotHistoryFetcher
             }
         }
         public int OdometerValue { get; set; }
-        public string OdometerUnit { get; set; }
-        public string MotTestNumber { get; set; }
+        public string? OdometerUnit { get; set; }
+        public string? MotTestNumber { get; set; }
     }
 }
