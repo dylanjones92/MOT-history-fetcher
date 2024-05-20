@@ -1,6 +1,10 @@
 # MOT-history-fetcher
 A webapp allowing users to request MOT history information for a given registration number via the https://beta.check-mot.service.gov.uk/ api
 
+## Requirements
+
+This is a NET 7 application and requires the NET 7 SDK in order to build and run.
+
 ## Setup Instructions
 
 1. **Clone the Repository**
